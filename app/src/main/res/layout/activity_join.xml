@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    tools:context=".JoinActivity">
+
+    <TextView
+        android:id="@+id/tv_id_j"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:text="아이디"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/iv_logo_j"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo_j" />
+
+    <TextView
+        android:id="@+id/tv_pw_j"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="비밀번호"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_id_j"
+        app:layout_constraintTop_toBottomOf="@+id/tv_id_j" />
+
+    <TextView
+        android:id="@+id/tv_name_j"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="이름"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_pw_j"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pw_j" />
+
+    <TextView
+        android:id="@+id/tv_relations_j"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="가족관계"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_name_j"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_j" />
+
+    <EditText
+        android:id="@+id/et_id_j"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="아이디를 입력해주세요"
+        android:inputType="text"
+        android:textColorHint="#807F7F"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_id_j"
+        app:layout_constraintEnd_toEndOf="@+id/iv_logo_j"
+        app:layout_constraintTop_toTopOf="@+id/tv_id_j" />
+
+    <EditText
+        android:id="@+id/et_pw_j"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="비밀번호를 입력해주세요"
+        android:inputType="text"
+        android:textColorHint="#807F7F"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_pw_j"
+        app:layout_constraintEnd_toEndOf="@+id/et_id_j"
+        app:layout_constraintTop_toTopOf="@+id/tv_pw_j" />
+
+    <EditText
+        android:id="@+id/et_name_j"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="이름을 입력해주세요."
+        android:inputType="text"
+        android:textColorHint="#807F7F"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name_j"
+        app:layout_constraintEnd_toEndOf="@+id/et_pw_j"
+        app:layout_constraintTop_toTopOf="@+id/tv_name_j" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_relations_j"
+        app:layout_constraintEnd_toEndOf="@+id/et_name_j"
+        app:layout_constraintTop_toTopOf="@+id/tv_relations_j" />
+
+    <ImageView
+        android:id="@+id/iv_logo_j"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/btn_join_j"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/button"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        android:text="회원가입하기"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/tv_relations_j"
+        app:layout_constraintTop_toBottomOf="@+id/tv_relations_j" />
+</androidx.constraintlayout.widget.ConstraintLayout>
