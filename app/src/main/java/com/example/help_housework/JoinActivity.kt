@@ -9,9 +9,11 @@ import com.example.help_housework.databinding.ActivityJoinBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-private lateinit var auth: FirebaseAuth
 class JoinActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private var mBinding : ActivityJoinBinding ?= null
     private val binding get() = mBinding!!
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +22,15 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
 
+        val relationshipList = listOf("선택하세요","아빠", "엄마", "아들", "딸")
+        val adapter = ArrayAdapter<String>(this, R.layout.spinner_item, relationshipList)
+        binding.spinner.adapter = adapter
+
         binding.btnJoinJ.setOnClickListener{
             val id = binding.etIdJ.text.toString()
             val pw = binding.etPwJ.text.toString()
+            val name = binding.etNameJ.text.toString()
+            val selectRelationship = binding.spinner.selectedItem.toString()
 
             auth.createUserWithEmailAndPassword(id, pw)
                 .addOnCompleteListener{task ->

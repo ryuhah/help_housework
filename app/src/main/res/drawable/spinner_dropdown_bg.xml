@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 드롭다운이 열렸을 때 -->
+    <item android:state_enabled="true">
+        <shape>
+            <!-- 배경 색상 -->
+            <solid android:color= "#371876"/>
+        </shape>
+    </item>
+    <!-- 드롭다운이 닫혔을 때 -->
+    <item>
+        <shape android:color="#00000000" />
+    </item>
+</selector>

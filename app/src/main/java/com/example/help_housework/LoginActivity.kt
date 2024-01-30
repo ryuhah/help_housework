@@ -9,8 +9,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 
-private lateinit var auth: FirebaseAuth
 class LoginActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private var mBinding : ActivityLoginBinding ? = null
     private val binding get() = mBinding!!
     override fun onCreate(savedInstanceState: Bundle?) {
