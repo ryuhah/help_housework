@@ -5,7 +5,7 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/icon_home"
-        android:title="홈" />
+        android:title="홈"/>
     <item
         android:id="@+id/nav_buyme"
         android:icon="@drawable/icon_buyme"

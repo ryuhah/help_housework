@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bnv)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             item.isChecked = true
