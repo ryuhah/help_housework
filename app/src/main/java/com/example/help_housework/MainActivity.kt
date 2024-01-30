@@ -12,8 +12,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            // Handle item selection here
-            item.isChecked = true // This line is important to update the checked state
+            item.isChecked = true
             true
         }
     }
