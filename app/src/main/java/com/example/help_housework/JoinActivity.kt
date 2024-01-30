@@ -9,8 +9,6 @@ import com.example.help_housework.databinding.ActivityJoinBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 class JoinActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
