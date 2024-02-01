@@ -37,6 +37,11 @@ class JoinActivity : AppCompatActivity() {
 
             val userAccount = UserAccount(id, pw, name, selectRelationship)
 
+            if (id.isBlank() || pw.isBlank() || name.isBlank() || selectRelationship == "선택하세요"){
+                Toast.makeText(this, "모든 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             auth.createUserWithEmailAndPassword(id, pw)
                 .addOnCompleteListener{task ->
                     if(task.isSuccessful){

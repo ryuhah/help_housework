@@ -23,6 +23,11 @@ class LoginActivity : AppCompatActivity() {
             val id = binding.etIdL.text.toString()
             val pw = binding.etPwL.text.toString()
 
+            if(id.isBlank() || pw.isBlank()){
+                Toast.makeText(this, "모든 내용을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             auth.signInWithEmailAndPassword(id, pw)
                 .addOnCompleteListener {task ->
                     if(task.isSuccessful){
