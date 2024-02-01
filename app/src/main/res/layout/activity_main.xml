@@ -7,11 +7,11 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnv"
+        android:id="@+id/bnv_id"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:itemIconSize="32dp"
         app:itemActiveIndicatorStyle="@null"
+        app:itemIconSize="32dp"
         app:itemIconTint="@drawable/bottom_click_color"
         app:itemTextColor="@drawable/bottom_click_color"
         app:labelVisibilityMode="selected"
@@ -22,11 +22,10 @@
 
     <FrameLayout
         android:id="@+id/fl_id"
-        android:layout_width="409dp"
-        android:layout_height="649dp"
-        app:layout_constraintBottom_toTopOf="@+id/bnv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bnv_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
