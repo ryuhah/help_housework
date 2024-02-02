@@ -4,5 +4,5 @@ data class UserAccount(
     var id: String?,
     var pw: String?,
     var name: String?,
-    var selectedRelation: String? // 선택된 관계
+    var selectedRelation: String?, // 선택된 관계
 )

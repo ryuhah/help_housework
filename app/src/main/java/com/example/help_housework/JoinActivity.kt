@@ -46,7 +46,9 @@ class JoinActivity : AppCompatActivity() {
                 .addOnCompleteListener{task ->
                     if(task.isSuccessful){
                         addUserToDatabase(userAccount)
+
                         Toast.makeText(this,"회원가입에 성공했습니다!", Toast.LENGTH_SHORT).show()
+
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -59,9 +61,11 @@ class JoinActivity : AppCompatActivity() {
 
     private fun addUserToDatabase (userAccount: UserAccount){
         val usersRef = database.child("users")
-        val userId = usersRef.push().key
-        userId?.let{
-            usersRef.child(it).setValue(userAccount)
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+
+        if(uid != null ){
+            usersRef.child(uid).setValue(userAccount)
         }
-    }
+        }
+
 }

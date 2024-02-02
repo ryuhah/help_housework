@@ -29,12 +29,6 @@ class InviteCodeActivity : AppCompatActivity() {
             binding.btnEnterCode.setTextColor(Color.WHITE)
             binding.btnGenerateCode.setTextColor(Color.parseColor("#FFE600"))
         }
-
-        binding.btnStart.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 
     private fun setFrag(fragNum : Int) {

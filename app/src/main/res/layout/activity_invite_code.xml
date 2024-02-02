@@ -8,24 +8,6 @@
     tools:context=".InviteCodeActivity">
 
     <Button
-        android:id="@+id/btn_start"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="150dp"
-        android:backgroundTint="@color/button"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        android:text="모임시작하기"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/btn_enterCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_start"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_enterCode">

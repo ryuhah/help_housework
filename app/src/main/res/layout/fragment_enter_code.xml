@@ -6,12 +6,47 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="초대코드 참여하기"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="80dp"
+        android:text="모임장이 공유한\n초대코드를 입력해주세요"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_start_e"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="150dp"
+        android:backgroundTint="@color/button"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="모임시작하기"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_code_e"
+        app:layout_constraintStart_toStartOf="@+id/et_code_e" />
+
+    <EditText
+        android:id="@+id/et_code_e"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/round"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="초대코드"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
