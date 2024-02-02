@@ -28,7 +28,7 @@ class Fragment_genatate_code : Fragment() {
         binding.btnGenerateG.setOnClickListener {
             invitationCode  = generateInvitationCode()
             binding.tvCodeG.text = invitationCode
-        }ㅅㄷㄴㅅ
+        }
 
         // 코드 클립보드 복사
         binding.tvCodeG.setOnClickListener {
