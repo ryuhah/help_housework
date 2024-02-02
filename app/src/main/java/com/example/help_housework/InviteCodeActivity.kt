@@ -1,5 +1,6 @@
 package com.example.help_housework
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -11,24 +12,41 @@ class InviteCodeActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = ActivityInviteCodeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        setFrag(0)
-        binding.btnEnterCode.setTextColor(Color.parseColor("#FFE600"))
+        val isFirstRun = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
+            .getBoolean("isFirstRun", true)
 
+        if(isFirstRun){
+            mBinding = ActivityInviteCodeBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        binding.btnEnterCode.setOnClickListener{
             setFrag(0)
             binding.btnEnterCode.setTextColor(Color.parseColor("#FFE600"))
-            binding.btnGenerateCode.setTextColor(Color.WHITE)
+
+
+            binding.btnEnterCode.setOnClickListener{
+                setFrag(0)
+                binding.btnEnterCode.setTextColor(Color.parseColor("#FFE600"))
+                binding.btnGenerateCode.setTextColor(Color.WHITE)
+            }
+
+            binding.btnGenerateCode.setOnClickListener{
+                setFrag(1)
+                binding.btnEnterCode.setTextColor(Color.WHITE)
+                binding.btnGenerateCode.setTextColor(Color.parseColor("#FFE600"))
+            }
+
+            getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean("isFirstRun", false)
+                .apply()
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
-        binding.btnGenerateCode.setOnClickListener{
-            setFrag(1)
-            binding.btnEnterCode.setTextColor(Color.WHITE)
-            binding.btnGenerateCode.setTextColor(Color.parseColor("#FFE600"))
-        }
+
     }
 
     private fun setFrag(fragNum : Int) {
