@@ -4,18 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F44336"
+    android:background="@null"
     tools:context=".HomeFragment">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="홈 페이지"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/tv_et_h"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="61dp"
+        android:background="@drawable/tv_rounded_background"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:text="모든 할 일"
+        android:textColor="#000000"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_ct_h"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/tv_rounded_background"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:text="완료된 작업"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_et_h"
+        app:layout_constraintStart_toStartOf="@+id/tv_et_h"
+        app:layout_constraintTop_toBottomOf="@+id/tv_et_h" />
+
+    <TextView
+        android:id="@+id/tv_etnb_h"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/tv_rounded_background"
+        android:gravity="center_vertical"
+        android:text="5"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_et_h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_et_h"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_ctnb_h"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="80dp"
+        android:gravity="center_vertical"
+        android:text="5"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_ct_h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_ct_h" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="310dp"
+        android:layout_height="298dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_noti_h"
+        app:layout_constraintStart_toStartOf="@+id/tv_noti_h" />
+
+    <Button
+        android:id="@+id/btn_noti_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#00FFFFFF"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="0dp"
+        android:text="+ 공지사항 추가하기"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintEnd_toEndOf="@+id/tv_ct_h" />
+
+    <TextView
+        android:id="@+id/tv_noti_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="공지사항"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintStart_toStartOf="@+id/tv_ct_h" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
