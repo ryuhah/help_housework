@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tv_et_h"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginTop="61dp"
         android:background="@drawable/tv_rounded_background"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tv_ct_h"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/tv_rounded_background"
@@ -65,20 +65,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_ct_h" />
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="310dp"
-        android:layout_height="298dp"
-        android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btn_noti_h"
-        app:layout_constraintStart_toStartOf="@+id/tv_noti_h" />
-
     <Button
         android:id="@+id/btn_noti_h"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="300dp"
         android:backgroundTint="#00FFFFFF"
         android:minWidth="0dp"
         android:minHeight="0dp"
@@ -86,17 +77,27 @@
         android:text="+ 공지사항 추가하기"
         android:textColor="#000000"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintEnd_toEndOf="@+id/tv_ct_h" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_ct_h"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ct_h" />
 
     <TextView
         android:id="@+id/tv_noti_h"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="300dp"
         android:text="공지사항"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintStart_toStartOf="@+id/tv_ct_h" />
+        app:layout_constraintStart_toStartOf="@+id/tv_ct_h"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ct_h" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_noti_h"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_noti_h"
+        app:layout_constraintTop_toBottomOf="@+id/btn_noti_h" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

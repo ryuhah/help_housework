@@ -6,16 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.help_housework.databinding.ActivityMainBinding
 import com.example.help_housework.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home,container,false)
+    private var mBinding : FragmentHomeBinding ?= null
+
+    private val binding get() = mBinding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+
+        val homeWriteList = arrayListOf(
+            HomeWrite("김원영","오늘 대청소날입니다","2024.02.07"),
+            HomeWrite("김빵빵","이번주 주말에 할머니 생신입니다","2024.02.07"),
+            HomeWrite("김다빵","이번달에 생일이신 엄마 생일축하드립니다","2024.02.06"),
+            HomeWrite("김스빵","이번년도 여행은 언제 가나요? 안가나요?","2024.02.06"),
+            HomeWrite("빵빵이","옥지얌~","2024.02.05"),
+            HomeWrite("옥지얌","빵빵아!","2024.02.05")
+
+        )
+
+        binding.rvHome.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+        binding.rvHome.setHasFixedSize(true)
+
+        binding.rvHome.adapter = HomeAdapter(homeWriteList)
+
+
+
 
         return view
     }
