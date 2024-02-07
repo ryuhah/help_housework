@@ -5,4 +5,6 @@ class BuymeWrite(
     val toUser : String,
     val content : String,
     val hyperlink : String,
+    val status : String,
+    val date : String
 )
