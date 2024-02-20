@@ -34,7 +34,7 @@
       app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
   <TextView
-      android:id="@+id/tv_touser_a"
+      android:id="@+id/tv_to_user_a"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="24dp"
@@ -51,13 +51,13 @@
       android:layout_marginStart="8dp"
       android:text="이/가"
       android:textSize="18sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="@+id/tv_touser_a"
-      app:layout_constraintStart_toEndOf="@+id/tv_touser_a"
-      app:layout_constraintTop_toTopOf="@+id/tv_touser_a" />
+      android:textStyle="normal"
+      app:layout_constraintBottom_toBottomOf="@+id/tv_to_user_a"
+      app:layout_constraintStart_toEndOf="@+id/tv_to_user_a"
+      app:layout_constraintTop_toTopOf="@+id/tv_to_user_a" />
 
   <Spinner
-      android:id="@+id/sp_fromuser_a"
+      android:id="@+id/sp_from_user_a"
       android:layout_width="100dp"
       android:layout_height="48dp"
       android:layout_marginStart="8dp"
@@ -72,10 +72,10 @@
       android:layout_marginStart="8dp"
       android:text="에게"
       android:textSize="18sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="@+id/sp_fromuser_a"
-      app:layout_constraintStart_toEndOf="@+id/sp_fromuser_a"
-      app:layout_constraintTop_toTopOf="@+id/sp_fromuser_a" />
+      android:textStyle="normal"
+      app:layout_constraintBottom_toBottomOf="@+id/sp_from_user_a"
+      app:layout_constraintStart_toEndOf="@+id/sp_from_user_a"
+      app:layout_constraintTop_toTopOf="@+id/sp_from_user_a" />
 
   <TextView
       android:id="@+id/textView12"
@@ -84,8 +84,8 @@
       android:layout_marginTop="32dp"
       android:text="내용을 입력해주세요"
       android:textSize="16sp"
-      app:layout_constraintStart_toStartOf="@+id/tv_touser_a"
-      app:layout_constraintTop_toBottomOf="@+id/sp_fromuser_a" />
+      app:layout_constraintStart_toStartOf="@+id/tv_to_user_a"
+      app:layout_constraintTop_toBottomOf="@+id/sp_from_user_a" />
 
   <TextView
       android:id="@+id/textView13"

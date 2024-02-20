@@ -5,4 +5,6 @@ data class UserAccount(
     var pw: String?,
     var name: String?,
     var selectedRelation: String?, // 선택된 관계
-)
+){
+    constructor(): this("","","","")
+}
