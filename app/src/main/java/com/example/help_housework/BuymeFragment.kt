@@ -1,5 +1,6 @@
 package com.example.help_housework
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,6 +40,10 @@ class BuymeFragment : Fragment() {
             }
         }
 
+        binding.btnFloating.setOnClickListener {
+            val intent = Intent(requireContext(),AddBuymeActivity::class.java)
+            startActivity(intent)
+        }
 
         return view
     }
