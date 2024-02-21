@@ -69,26 +69,26 @@
         android:id="@+id/btn_noti_h"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#00FFFFFF"
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:padding="0dp"
         android:text="+ 공지사항 추가하기"
         android:textColor="#000000"
-        android:textSize="18dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_ct_h"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ct_h" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_work" />
 
     <TextView
         android:id="@+id/tv_noti_h"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
         android:text="공지사항"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_noti_h"
         app:layout_constraintStart_toStartOf="@+id/tv_ct_h"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ct_h" />
+        app:layout_constraintTop_toTopOf="@+id/btn_noti_h" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
@@ -99,5 +99,58 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_noti_h"
         app:layout_constraintTop_toBottomOf="@+id/btn_noti_h" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_work"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_work"
+        app:layout_constraintEnd_toEndOf="@+id/tv_ct_h"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="100dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        app:cardBackgroundColor="@color/button"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_ct_h"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ct_h">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_addwork"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/tv_circle"
+                android:gravity="center_horizontal"
+                android:text="+"
+                android:textColor="#5A5A5A"
+                android:textSize="48sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.503" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="할 일 추가하기"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

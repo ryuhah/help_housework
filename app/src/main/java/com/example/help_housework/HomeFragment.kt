@@ -1,5 +1,6 @@
 package com.example.help_housework
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,7 +21,6 @@ class HomeFragment : Fragment() {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         val homeWriteList = arrayListOf(
             HomeWrite("김원영","오늘 대청소날입니다","2024.02.07"),
             HomeWrite("김빵빵","이번주 주말에 할머니 생신입니다","2024.02.07"),
@@ -37,6 +37,23 @@ class HomeFragment : Fragment() {
         binding.rvHome.adapter = HomeAdapter(homeWriteList)
 
 
+        val workWriteList = arrayListOf(
+            WorkWrite("거실청소",R.drawable.tv_circle),
+            WorkWrite("방청소",R.drawable.tv_circle),
+            WorkWrite("설거지",R.drawable.tv_circle),
+            WorkWrite("화장실청소",R.drawable.tv_circle)
+
+        )
+        binding.rvWork.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        binding.rvWork.setHasFixedSize(true)
+
+        binding.rvWork.adapter = WorkAdapter(workWriteList)
+
+
+        binding.btnNotiH.setOnClickListener {
+            val intent = Intent(requireContext(),AddNoticeActivity::class.java)
+            startActivity(intent)
+        }
 
 
         return view
