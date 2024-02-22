@@ -55,6 +55,11 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.tvAddwork.setOnClickListener {
+            val intent = Intent(requireContext(),AddWorkActivity::class.java)
+            startActivity(intent)
+        }
+
 
         return view
     }

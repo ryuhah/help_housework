@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Help_housework"
         tools:targetApi="31">
         <activity
+            android:name=".AddWorkActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddNoticeActivity"
             android:exported="false" />
         <activity
@@ -25,13 +28,13 @@
             android:exported="false" />
         <activity
             android:name=".JoinActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
