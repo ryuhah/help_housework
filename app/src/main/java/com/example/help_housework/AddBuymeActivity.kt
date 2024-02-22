@@ -42,8 +42,8 @@ class AddBuymeActivity : AppCompatActivity() {
                     if(snapshot.exists()){
                         val user = snapshot.getValue(UserAccount::class.java)
                         user?.let {
-                            // tv_to_user_a 현재 사용자의 이름과 관계
-                            binding.tvToUserA.text = "${it.selectedRelation} ${it.name}"
+                            // tv_from_user_a 현재 사용자의 이름과 관계
+                            binding.tvFromUserA.text = "${it.selectedRelation} ${it.name}"
                         }
                         getInvitationCode()
                     }
@@ -73,6 +73,7 @@ class AddBuymeActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -93,6 +94,7 @@ class AddBuymeActivity : AppCompatActivity() {
                 }
             }
             override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -112,10 +114,11 @@ class AddBuymeActivity : AppCompatActivity() {
                         }
                         val adapter = ArrayAdapter<String>(this@AddBuymeActivity, android.R.layout.simple_spinner_item, usersList)
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        binding.spFromUserA.adapter = adapter
+                        binding.spToUserA.adapter = adapter
                     }
 
                     override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
                     }
                 })
             }
