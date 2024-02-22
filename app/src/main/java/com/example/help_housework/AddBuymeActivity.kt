@@ -45,6 +45,7 @@ class AddBuymeActivity : AppCompatActivity() {
                             // tv_to_user_a 현재 사용자의 이름과 관계
                             binding.tvToUserA.text = "${it.selectedRelation} ${it.name}"
                         }
+                        getInvitationCode()
                     }
                 }
 
@@ -55,6 +56,74 @@ class AddBuymeActivity : AppCompatActivity() {
         }
     }
 
+    // db에서 초대 코드 가져오기
+    private fun getInvitationCode() {
+        val invitationRef = database.child("invitations")
+
+        invitationRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (invitationSnapshot in snapshot.children){
+                        val invitationCode = invitationSnapshot.key
+                        invitationCode?.let { code ->
+                            checkCurrentUserInInvitation(code)
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    // 초대코드 확인하기
+    private fun checkCurrentUserInInvitation(code: String) {
+        val meetupsRef = database.child("meetups").child(code)
+        meetupsRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (userSnapshot in snapshot.children){
+                    val userUid = userSnapshot.key
+                    userUid?.let {uid ->
+                        if(uid == auth.currentUser?.uid){
+                            addUserListToSpinner(snapshot)
+                            return
+                        }
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    // 스피너에 목록 추가하기
+    private fun addUserListToSpinner(snapshot: DataSnapshot) {
+        val usersList = mutableListOf<String>()
+        for (userSnapshot in snapshot.children){
+            val userUid = userSnapshot.key
+            userUid?.let { uid ->
+                database.child("users").child(uid).addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(userSnapshot: DataSnapshot) {
+                        val user = userSnapshot.getValue(UserAccount::class.java)
+                        user?.let {
+                            val relationName = "${it.selectedRelation} ${it.name}"
+                            usersList.add(relationName)
+                        }
+                        val adapter = ArrayAdapter<String>(this@AddBuymeActivity, android.R.layout.simple_spinner_item, usersList)
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        binding.spFromUserA.adapter = adapter
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+            }
+        }
+    }
+
+
+    // tool bar --------------------------------
     // 툴바 메뉴 버튼을 설정
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_buyme_menu,menu)

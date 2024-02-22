@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
+        android:background="@color/button"
         android:clickable="true"
         android:src="@drawable/icon_add"
         android:tint="@color/white"
