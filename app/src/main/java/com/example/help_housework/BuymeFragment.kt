@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.help_housework.databinding.FragmentBuymeBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class BuymeFragment : Fragment() {
@@ -29,8 +33,6 @@ class BuymeFragment : Fragment() {
 
         // Adapter 설정
         binding.rvBuyme.adapter = buymeAdapter
-//        binding.rvBuyme.adapter = BuymeAdapter(buymeWriteList)
-
 
         binding.btnFloating.setOnClickListener {
             val intent = Intent(requireContext(),AddBuymeActivity::class.java)

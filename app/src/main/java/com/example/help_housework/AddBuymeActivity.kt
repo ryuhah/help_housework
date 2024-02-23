@@ -78,7 +78,7 @@ class AddBuymeActivity : AppCompatActivity() {
             }
 
             setResult(Activity.RESULT_OK, intent)
-            addBuymewriteToDB(fromUser, toUser, content, hyperlink, date)
+            getInvitationCodetoDB()
             finish()
         }
     }
@@ -106,7 +106,7 @@ class AddBuymeActivity : AppCompatActivity() {
         })
     }
 
-    //  초대코드 확인하기
+    //  spinner 목록 추가-2 현재 접속한 사람의 초대코드 확인하기
     private fun checkCurrentUserInInvitation(code: String) {
         val meetupsRef = database.child("meetups").child(code)
         meetupsRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener{
@@ -154,8 +154,8 @@ class AddBuymeActivity : AppCompatActivity() {
     }
 
     // db에 글 정보 추가하기 -------------------------------
-    private fun addBuymewriteToDB(fromUser: String, toUser: String, content: String, hyperlink: String, date: String) {
-        // db에서 초대 코드 가져오기
+    // db에 글 정보 추가하기-1 db에서 초대 코드 가져오기
+    private fun getInvitationCodetoDB(){
         val invitationRef = database.child("invitations")
 
         invitationRef.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -164,26 +164,7 @@ class AddBuymeActivity : AppCompatActivity() {
                     for (invitationSnapshot in snapshot.children){
                         val invitationCode = invitationSnapshot.key
                         invitationCode?.let { code ->
-                            // db에 경로 및 내용 추가하기
-                            val meetupsRef = database.child("meetups").child(code)
-                            meetupsRef.child("buyme_write").addListenerForSingleValueEvent(object : ValueEventListener{
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    val count = snapshot.childrenCount
-                                    val nextNumber = String.format("%03d", count+1)//001, 002
-                                    val newPostKey = "buyme-$nextNumber"
-
-                                    val status = "구매중"
-
-                                    val buymeWrite = BuymeWrite(fromUser, toUser, content, hyperlink, status, date)
-
-                                    val newPostRef = meetupsRef.child("buyme_write").child(newPostKey)
-                                    newPostRef.setValue(buymeWrite)
-                                }
-
-                                override fun onCancelled(error: DatabaseError) {
-                                    Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
-                                }
-                            })
+                            checkCurrentUserInInvitationToDB(code)
                         }
                     }
                 }
@@ -193,8 +174,53 @@ class AddBuymeActivity : AppCompatActivity() {
                 Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
 
+    // db에 글 정보 추가하기-2 현재 접속한 사람의 초대코드 확인하기
+    private fun checkCurrentUserInInvitationToDB(code: String){
+        val meetupsRef = database.child("meetups").child(code)
+        meetupsRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (userSnapshot in snapshot.children){
+                    val userUid = userSnapshot.key
+                    userUid?.let {uid ->
+                        if(uid == auth.currentUser?.uid){
+                            addBuymeWriteToDB(snapshot, code)
+                            return
+                        }
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
+    // db에 글 정보 추가하기-3 DB에 경로 및 내용 추가하기
+    private fun addBuymeWriteToDB(snapshot: DataSnapshot, code: String){
+        val fromUser = binding.tvFromUserA.text.toString()
+        val toUser = binding.spToUserA.selectedItem.toString()
+        val content = binding.etContentA.text.toString()
+        val hyperlink = binding.etHyperlinkA.text.toString()
+        val status = "구매중"
+        val date = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(java.util.Date())
+
+        val meetupsRef = database.child("meetups").child(code)
+        meetupsRef.child("buyme_write").addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val count = snapshot.childrenCount
+                val nextNumber = String.format("%03d", count+1)//001, 002
+                val newPostKey = "buyme-$nextNumber"
+                val buymeWrite = BuymeWrite(fromUser, toUser, content, hyperlink, status, date)
+
+                val newPostRef = meetupsRef.child("buyme_write").child(newPostKey)
+                newPostRef.setValue(buymeWrite)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
