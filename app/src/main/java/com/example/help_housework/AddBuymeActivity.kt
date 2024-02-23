@@ -78,11 +78,13 @@ class AddBuymeActivity : AppCompatActivity() {
             }
 
             setResult(Activity.RESULT_OK, intent)
+            addBuymewriteToDB(fromUser, toUser, content, hyperlink, date)
             finish()
         }
     }
 
-    // db에서 초대 코드 가져오기
+    // spinner 목록 추가 -------------------------------
+    // spinner 목록 추가-1 db에서 초대 코드 가져오기
     private fun getInvitationCode() {
         val invitationRef = database.child("invitations")
 
@@ -104,7 +106,7 @@ class AddBuymeActivity : AppCompatActivity() {
         })
     }
 
-    // 초대코드 확인하기
+    //  초대코드 확인하기
     private fun checkCurrentUserInInvitation(code: String) {
         val meetupsRef = database.child("meetups").child(code)
         meetupsRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener{
@@ -125,7 +127,7 @@ class AddBuymeActivity : AppCompatActivity() {
         })
     }
 
-    // 스피너에 목록 추가하기
+    // spinner 목록 추가-3 스피너에 목록 추가하기
     private fun addUserListToSpinner(snapshot: DataSnapshot) {
         val usersList = mutableListOf<String>()
         for (userSnapshot in snapshot.children){
@@ -151,15 +153,59 @@ class AddBuymeActivity : AppCompatActivity() {
         }
     }
 
+    // db에 글 정보 추가하기 -------------------------------
+    private fun addBuymewriteToDB(fromUser: String, toUser: String, content: String, hyperlink: String, date: String) {
+        // db에서 초대 코드 가져오기
+        val invitationRef = database.child("invitations")
+
+        invitationRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (invitationSnapshot in snapshot.children){
+                        val invitationCode = invitationSnapshot.key
+                        invitationCode?.let { code ->
+                            // db에 경로 및 내용 추가하기
+                            val meetupsRef = database.child("meetups").child(code)
+                            meetupsRef.child("buyme_write").addListenerForSingleValueEvent(object : ValueEventListener{
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    val count = snapshot.childrenCount
+                                    val nextNumber = String.format("%03d", count+1)//001, 002
+                                    val newPostKey = "buyme-$nextNumber"
+
+                                    val status = "구매중"
+
+                                    val buymeWrite = BuymeWrite(fromUser, toUser, content, hyperlink, status, date)
+
+                                    val newPostRef = meetupsRef.child("buyme_write").child(newPostKey)
+                                    newPostRef.setValue(buymeWrite)
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
+    }
+
 
     // tool bar --------------------------------
-    // 툴바 메뉴 버튼을 설정
+    // tool bar-1 툴바 메뉴 버튼을 설정
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_buyme_menu,menu)
         return true
     }
 
-    // 툴바 메뉴 버튼이 클릭 됐을 때 콜백
+    // tool bar-2 툴바 메뉴 버튼이 클릭 됐을 때 콜백
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item!!.itemId){
             android.R.id.home -> {
@@ -170,6 +216,7 @@ class AddBuymeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    // tool bar-3
     override fun onBackPressed() {
         super.onBackPressed()
     }
