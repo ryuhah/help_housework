@@ -27,7 +27,6 @@
                 android:id="@+id/tv_purchaseStatus_b"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/tv_purchase_y"
                 android:gravity="center"
@@ -36,17 +35,18 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="5dp"
                 android:text="구매완료"
+                app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textView11" />
 
             <TextView
                 android:id="@+id/tv_fromUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:text="엄마 은영"
-                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:text="엄마 정은영"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,9 +55,9 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:text="이/가"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_fromUser"
                 app:layout_constraintStart_toEndOf="@+id/tv_fromUser"
                 app:layout_constraintTop_toTopOf="@+id/tv_fromUser" />
 
@@ -65,10 +65,11 @@
                 android:id="@+id/tv_toUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="딸 하경"
-                android:textSize="18sp"
+                android:layout_marginStart="4dp"
+                android:text="아빠 류양민"
+                android:textSize="17sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="@+id/textView9" />
 
@@ -76,9 +77,9 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:text="에게"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_toUser"
                 app:layout_constraintStart_toEndOf="@+id/tv_toUser"
                 app:layout_constraintTop_toTopOf="@+id/tv_toUser" />
 
@@ -110,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="16dp"
                 android:text="2024.02.06"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
