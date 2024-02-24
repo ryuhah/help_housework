@@ -24,6 +24,7 @@ class AddBuymeActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
     private lateinit var database : DatabaseReference
     private lateinit var auth : FirebaseAuth
+    private var usersList = mutableListOf<Pair<String, String>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +79,7 @@ class AddBuymeActivity : AppCompatActivity() {
             }
 
             setResult(Activity.RESULT_OK, intent)
-            getInvitationCodetoDB()
+            getInvitationCodetoDB(usersList)
             finish()
         }
     }
@@ -128,8 +129,8 @@ class AddBuymeActivity : AppCompatActivity() {
     }
 
     // spinner 목록 추가-3 스피너에 목록 추가하기
-    private fun addUserListToSpinner(snapshot: DataSnapshot) {
-        val usersList = mutableListOf<String>()
+    private fun addUserListToSpinner(snapshot: DataSnapshot){
+        usersList.clear()
         for (userSnapshot in snapshot.children){
             val userUid = userSnapshot.key
             userUid?.let { uid ->
@@ -138,11 +139,13 @@ class AddBuymeActivity : AppCompatActivity() {
                         val user = userSnapshot.getValue(UserAccount::class.java)
                         user?.let {
                             val relationName = "${it.selectedRelation} ${it.name}"
-                            usersList.add(relationName)
+//                            usersList.add(relationName)
+                            usersList.add(uid to relationName)
+                            if(usersList.size == snapshot.childrenCount.toInt()){
+                                setSpinnerAdapter(usersList)
+
+                            }
                         }
-                        val adapter = ArrayAdapter<String>(this@AddBuymeActivity, android.R.layout.simple_spinner_item, usersList)
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                        binding.spToUserA.adapter = adapter
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -153,9 +156,17 @@ class AddBuymeActivity : AppCompatActivity() {
         }
     }
 
+    private fun setSpinnerAdapter(usersList : List<Pair<String, String>>){
+        val adapter = ArrayAdapter<String>(this@AddBuymeActivity, android.R.layout.simple_spinner_item, usersList.map{it.second})
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spToUserA.adapter = adapter
+    }
+
+
+
     // db에 글 정보 추가하기 -------------------------------
     // db에 글 정보 추가하기-1 db에서 초대 코드 가져오기
-    private fun getInvitationCodetoDB(){
+    private fun getInvitationCodetoDB(usersList: List<Pair<String, String>>){
         val invitationRef = database.child("invitations")
 
         invitationRef.addListenerForSingleValueEvent(object : ValueEventListener{
@@ -164,7 +175,7 @@ class AddBuymeActivity : AppCompatActivity() {
                     for (invitationSnapshot in snapshot.children){
                         val invitationCode = invitationSnapshot.key
                         invitationCode?.let { code ->
-                            checkCurrentUserInInvitationToDB(code)
+                            checkCurrentUserInInvitationToDB(code, usersList)
                         }
                     }
                 }
@@ -177,7 +188,7 @@ class AddBuymeActivity : AppCompatActivity() {
     }
 
     // db에 글 정보 추가하기-2 현재 접속한 사람의 초대코드 확인하기
-    private fun checkCurrentUserInInvitationToDB(code: String){
+    private fun checkCurrentUserInInvitationToDB(code: String, usersList: List<Pair<String, String>>){
         val meetupsRef = database.child("meetups").child(code)
         meetupsRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -185,7 +196,7 @@ class AddBuymeActivity : AppCompatActivity() {
                     val userUid = userSnapshot.key
                     userUid?.let {uid ->
                         if(uid == auth.currentUser?.uid){
-                            addBuymeWriteToDB(snapshot, code)
+                            addBuymeWriteToDB(snapshot, code, usersList)
                             return
                         }
                     }
@@ -198,7 +209,12 @@ class AddBuymeActivity : AppCompatActivity() {
     }
 
     // db에 글 정보 추가하기-3 DB에 경로 및 내용 추가하기
-    private fun addBuymeWriteToDB(snapshot: DataSnapshot, code: String){
+    private fun addBuymeWriteToDB(snapshot: DataSnapshot, code: String, usersList: List<Pair<String, String>>){
+        val fromUserUID = auth.currentUser?.uid
+        val selectedUserIndex = binding.spToUserA.selectedItemPosition
+        val selectedUserPair = usersList[selectedUserIndex]
+        val toUserUID = selectedUserPair.first
+
         val fromUser = binding.tvFromUserA.text.toString()
         val toUser = binding.spToUserA.selectedItem.toString()
         val content = binding.etContentA.text.toString()
@@ -212,10 +228,20 @@ class AddBuymeActivity : AppCompatActivity() {
                 val count = snapshot.childrenCount
                 val nextNumber = String.format("%03d", count+1)//001, 002
                 val newPostKey = "buyme-$nextNumber"
-                val buymeWrite = BuymeWrite(fromUser, toUser, content, hyperlink, status, date)
+
+                val buymeWriteMap = mapOf(
+                    "fromUserUID" to fromUserUID,
+                    "toUserUID" to toUserUID,
+                    "fromUser" to fromUser,
+                    "toUser" to toUser,
+                    "content" to content,
+                    "hyperlink" to hyperlink,
+                    "status" to status,
+                    "date" to date
+                )
 
                 val newPostRef = meetupsRef.child("buyme_write").child(newPostKey)
-                newPostRef.setValue(buymeWrite)
+                newPostRef.setValue(buymeWriteMap)
             }
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()

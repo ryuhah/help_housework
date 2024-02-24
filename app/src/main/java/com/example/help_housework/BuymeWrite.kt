@@ -6,5 +6,5 @@ class BuymeWrite(
     val content : String,
     val hyperlink : String,
     val status : String,
-    val date : String
+    val date : String,
 )
