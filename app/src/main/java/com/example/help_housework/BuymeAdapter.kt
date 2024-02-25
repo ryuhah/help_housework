@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BuymeAdapter(val buymeWriteList : ArrayList<BuymeWrite>) : RecyclerView.Adapter<BuymeAdapter.CustomViewHolder>(){
+class BuymeAdapter(val buymeWriteList : MutableList<BuymeWrite>) : RecyclerView.Adapter<BuymeAdapter.CustomViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int ) : BuymeAdapter.CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.buyme_item, parent,false)
 
@@ -18,19 +18,25 @@ class BuymeAdapter(val buymeWriteList : ArrayList<BuymeWrite>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: BuymeAdapter.CustomViewHolder, position: Int) {
+        val buymeWrite = buymeWriteList[position]
 
-        holder.fromUser.text = buymeWriteList.get(position).fromUser
-        holder.toUser.text = buymeWriteList.get(position).toUser
-        holder.content.text = buymeWriteList.get(position).content
-        holder.hyperlink.text = buymeWriteList.get(position).hyperlink
-        holder.status.text = buymeWriteList.get(position).status
-        holder.date.text = buymeWriteList.get(position).date
+        holder.fromUser.text = buymeWrite.fromUser
+        holder.toUser.text = buymeWrite.toUser
+        holder.content.text = buymeWrite.content
+        holder.hyperlink.text = buymeWrite.hyperlink
+        holder.status.text = buymeWrite.status
+        holder.date.text = buymeWrite.date
 
-        if (buymeWriteList.get(position).status =="구매완료"){
+        if (buymeWrite.status =="구매완료"){
             holder.itemView.findViewById<TextView>(R.id.tv_purchaseStatus_b).setBackgroundResource(R.drawable.tv_purchase_y)
         } else {
             holder.itemView.findViewById<TextView>(R.id.tv_purchaseStatus_b).setBackgroundResource(R.drawable.tv_purchase_n)
         }
+    }
+    fun setBuymeList(buymeList : MutableList<BuymeWrite>){
+        buymeWriteList.clear()
+        buymeWriteList.addAll(buymeList)
+        notifyDataSetChanged()
     }
 
 
