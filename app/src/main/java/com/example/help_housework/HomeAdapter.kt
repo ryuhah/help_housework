@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class HomeAdapter (val homeWriteList : ArrayList<HomeWrite>) : RecyclerView.Adapter<HomeAdapter.CostomViewHolder>()
+class HomeAdapter (val notiWriteList : ArrayList<HomeWrite>) : RecyclerView.Adapter<HomeAdapter.CostomViewHolder>()
 {
 
 
@@ -16,13 +16,14 @@ class HomeAdapter (val homeWriteList : ArrayList<HomeWrite>) : RecyclerView.Adap
     }
 
     override fun getItemCount(): Int {
-        return homeWriteList.size
+        return notiWriteList.size
     }
 
     override fun onBindViewHolder(holder: HomeAdapter.CostomViewHolder, position: Int) {
-        holder.writer.text = homeWriteList.get(position).writer
-        holder.contenth.text = homeWriteList.get(position).contenth
-        holder.dateh.text = homeWriteList.get(position).dateh
+
+        holder.writer.text = notiWriteList.get(position).writer
+        holder.contenth.text = notiWriteList.get(position).contenth
+        holder.dateh.text = notiWriteList.get(position).dateh
 
     }
 

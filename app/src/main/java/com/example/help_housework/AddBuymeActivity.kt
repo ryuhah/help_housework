@@ -239,9 +239,11 @@ class AddBuymeActivity : AppCompatActivity() {
                     "status" to status,
                     "date" to date
                 )
+//                val buymeWrite = BuymeWrite(fromUser, toUser, content, hyperlink, status, date)
 
                 val newPostRef = meetupsRef.child("buyme_write").child(newPostKey)
                 newPostRef.setValue(buymeWriteMap)
+//                newPostRef.setValue(buymeWrite)
             }
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@AddBuymeActivity, "데이터베이스 읽기 오류 : ${error.message}", Toast.LENGTH_SHORT).show()
