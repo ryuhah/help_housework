@@ -27,6 +27,13 @@ class HomeAdapter (val notiWriteList : ArrayList<HomeWrite>) : RecyclerView.Adap
 
     }
 
+    fun setNoticeList(noticeList: ArrayList<HomeWrite>) {
+        notiWriteList.clear()
+        notiWriteList.addAll(noticeList)
+        notifyDataSetChanged()
+
+    }
+
     class CostomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val writer = itemView.findViewById<TextView>(R.id.tv_writer)
         val contenth = itemView.findViewById<TextView>(R.id.tv_content_h)

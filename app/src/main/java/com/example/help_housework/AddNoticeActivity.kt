@@ -40,17 +40,6 @@ class AddNoticeActivity : AppCompatActivity() {
 
         // 공지사항 작성하기 버튼
         binding.btnAddnoti.setOnClickListener{
-//            val content = binding.etContentNoti.text.toString()
-//            val date = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()).format(java.util.Date())
-
-//            val intent = Intent().apply{
-//                putExtra("writer", writer)
-//                putExtra("contenth", content)
-//                putExtra("dateh",date)
-//            }
-//
-//        setResult(Activity.RESULT_OK, intent)
-//        finish()
             val currentUserUid = auth.currentUser?.uid
             currentUserUid?. let { uid ->
                 database.child("users").child(uid).addListenerForSingleValueEvent(object : ValueEventListener{
@@ -94,7 +83,6 @@ class AddNoticeActivity : AppCompatActivity() {
     // db에 글 정보 추가하기-1 db에서 초대 코드 가져오기
     private fun getInvitationCodetoDB(writer: String?){
         val invitationRef = database.child("invitations")
-
         invitationRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
@@ -105,14 +93,13 @@ class AddNoticeActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-
             }
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
 
+    // db에 글 정보 추가하기-2 현재 접속한 사람의 초대코드 확인하기
     private fun checkCurrentUserInInvitationToDB(code: String, writer: String?) {
         val meetupsRef = database.child("meetups").child(code)
         meetupsRef.child("users").addListenerForSingleValueEvent(object : ValueEventListener{
@@ -126,14 +113,13 @@ class AddNoticeActivity : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
-
             }
         })
 
     }
 
+    // db에 글 정보 추가하기-3 db에 경로 및 내용 추가하기
     private fun addNoticeWriteToDB(code: String, writer: String?) {
         val writerUID = auth.currentUser?.uid
         val content = binding.etContentNoti.text.toString()
@@ -162,7 +148,6 @@ class AddNoticeActivity : AppCompatActivity() {
             }
         })
     }
-
 
     // toolbar ------------------------
     // 툴바 메뉴 버튼을 설정
